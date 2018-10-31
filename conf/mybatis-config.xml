@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+    	<typeAlias alias="DemoDto" type="net.herit.domain.DemoDto"/>
+    	<typeAlias alias="ChsDeviceModelDto" type="net.herit.domain.ChsDeviceModelDto"/>
+    	
+        <package name="net.herit.domain"/>
+    </typeAliases>
+    
+    <mappers>
+        <mapper resource="mappers/demo.xml"/>
+        <mapper resource="mappers/pvsMapper.xml"/>
+    </mappers>
+</configuration>

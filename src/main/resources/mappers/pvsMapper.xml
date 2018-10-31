@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.herit.mapper.PvsMapper">
+	
+	<resultMap id="chsDeviceModelInfo" type="net.herit.domain.ChsDeviceModelDto">
+		<id property="id" column="ID" />
+		<result property="chsDeviceTypeCode" column="CHS_DEVICE_TYPE_CODE" />
+		<result property="name" column="NAME" />
+		<result property="modelNo" column="MODEL_NO" />
+		<result property="devcMdlGrpCd" column="DEVC_MDL_GRP_CD" />
+		<result property="devcMdlGrpNm" column="DEVC_MDL_GRP_NM" />
+		<result property="devcMdlCd" column="DEVC_MDL_CD" />
+		<result property="devcMdlNm" column="DEVC_MDL_NM" />
+		<result property="modelVendor" column="MODEL_VENDOR" />
+		<result property="modelVendorCd" column="MODEL_VENDOR_CD" />
+		<result property="disabled" column="DISABLED" />
+		<result property="source" column="SOURCE" />
+		<result property="platformApiVer" column="PLATFORM_API_VER" />
+		<result property="connType" column="CONN_TYPE" />
+		<result property="pvType" column="PV_TYPE" />
+		<result property="subType" column="SUBTYPE" />
+		<result property="createTime" column="CREATE_TIME" />
+		<result property="updateTime" column="UPDATE_TIME" />
+	</resultMap>
+	
+    <select id="getDemo" resultType="String">
+        SELECT 'fINN_AND_JAKE' AS TEST FROM DUAL
+    </select>
+    
+    <select id="getChsDeviceModel" resultMap="chsDeviceModelInfo">
+        SELECT ID, CHS_DEVICE_TYPE_CODE, NAME, MODEL_NO, DEVC_MDL_GRP_CD, DEVC_MDL_GRP_NM, DEVC_MDL_CD, DEVC_MDL_NM, MODEL_VENDOR, MODEL_VENDOR_CD, DISABLED, SOURCE, PLATFORM_API_VER, CONN_TYPE, PV_TYPE, SUBTYPE, CREATE_TIME, UPDATE_TIME 
+        FROM CHS_DEVICE_MODEL
+    </select>
+	
+</mapper>
