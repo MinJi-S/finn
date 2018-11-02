@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Altibase-1.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/Altibase.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
