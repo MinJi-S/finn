@@ -25,7 +25,7 @@ public class MsgController {
 	
 	@CrossOrigin(origins="*")		// 글로벌 크로스 셋팅....... 모든 외부 도메인에서 요청 처리 허가
 	@RequestMapping(method=RequestMethod.GET, value="/msg/server/list")
-	public String pvs(HttpServletRequest request) throws Exception {
+	public String list(HttpServletRequest request) throws Exception {
 		
 		List<String> chsDeviceModelDtoList = new ArrayList<>();
 		
@@ -67,7 +67,7 @@ public class MsgController {
         
         String[] array = cmdList.toArray(new String[cmdList.size()]);
         
-        System.out.println("process runtime Excute.");
+        System.out.println("[/msg/server/list] >> process runtime Excute.");
         
         for(int i=0; i<array.length; i++) {
         	System.out.println("> " + array[i]);
@@ -96,12 +96,12 @@ public class MsgController {
  
             // shell 실행이 정상 종료되었을 경우
             if (process.exitValue() == 0) {
-                System.out.println("성공");
+                System.out.println("[/msg/server/list] >> 성공");
                 System.out.println(successOutput.toString());
                 output = successOutput;
             } else {
                 // shell 실행이 비정상 종료되었을 경우
-                System.out.println("비정상 종료");
+                System.out.println("[/msg/server/list] >> 비정상 종료");
                 System.out.println(errorOutput.toString());
                 output = errorOutput;
             }
@@ -109,7 +109,7 @@ public class MsgController {
             // shell 실행시 에러가 발생
             if (!errorOutput.toString().isEmpty()) {
                 // shell 실행이 비정상 종료되었을 경우
-                System.out.println("오류");
+                System.out.println("[/msg/server/list] >> 오류");
                 System.out.println(errorOutput.toString());
                 output.append("\n");
                 output.append(errorOutput);
