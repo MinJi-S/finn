@@ -127,10 +127,16 @@ public class MsgController {
                 e1.printStackTrace();
             }
         }
-    
+
+        ArrayList<String> outputList = new ArrayList<String>();
+        String[] split = output.toString().split("\n");
+
+        for(int i=0; i < split.length; i++) {
+            outputList.add(i, split[i]);
+        }
         // response
 		ObjectMapper responseMapper = new ObjectMapper();
-		String responseJson = responseMapper.writeValueAsString(output/*resultMap*/);
+		String responseJson = responseMapper.writeValueAsString(outputList/*resultMap*/);
 		
 		return responseJson;
 	}
