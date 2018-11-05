@@ -132,7 +132,9 @@ public class MsgController {
         String[] split = output.toString().split("\n");
 
         for(int i=0; i < split.length; i++) {
-            outputList.add(i, split[i]);
+            if(!"".equals(split[i])) {
+                outputList.add(i, split[i]);
+            }
         }
         // response
 		ObjectMapper responseMapper = new ObjectMapper();
