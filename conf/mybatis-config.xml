@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-    	<typeAlias alias="DemoDto" type="net.herit.domain.DemoDto"/>
-    	<typeAlias alias="ChsDeviceModelDto" type="net.herit.domain.ChsDeviceModelDto"/>
+    	<typeAlias alias="DemoDto" type="net.herit.dto.DemoDto"/>
+    	<typeAlias alias="ChsDeviceModelDto" type="net.herit.dto.ChsDeviceModelDto"/>
     	
-        <package name="net.herit.domain"/>
+        <package name="net.herit.dto"/>
     </typeAliases>
     
     <mappers>

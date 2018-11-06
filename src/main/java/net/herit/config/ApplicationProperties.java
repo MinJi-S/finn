@@ -14,7 +14,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 @Configuration	// 어플리케이션 컨텍스트 또는 빈 팩토리라고 알려주는 것
-@MapperScan(basePackages = {"net.herit.mapper"})
+@MapperScan(basePackages = {"net.herit.service."})
 @Data
 @Slf4j
 public class ApplicationProperties {

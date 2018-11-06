@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.herit.mapper.PvsMapper">
+<mapper namespace="net.herit.service.impl.PvsServiceImpl">
 	
-	<resultMap id="chsDeviceModelInfo" type="net.herit.domain.ChsDeviceModelDto">
+	<resultMap id="chsDeviceModelInfo" type="net.herit.dto.ChsDeviceModelDto">
 		<id property="id" column="ID" />
 		<result property="chsDeviceTypeCode" column="CHS_DEVICE_TYPE_CODE" />
 		<result property="name" column="NAME" />

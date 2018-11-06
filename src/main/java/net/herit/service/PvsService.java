@@ -1,13 +1,12 @@
-package net.herit.mapper;
+package net.herit.service;
 
-import net.herit.domain.ChsDeviceModelDto;
+import net.herit.dto.ChsDeviceModelDto;
 
 import java.util.List;
 
-public interface PvsMapper {
+public interface PvsService {
 	
 	String getDemo() throws Exception;
-	
 	List<ChsDeviceModelDto> getChsDeviceModel() throws Exception;
 	
 }

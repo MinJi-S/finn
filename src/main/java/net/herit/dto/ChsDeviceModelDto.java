@@ -1,4 +1,4 @@
-package net.herit.domain;
+package net.herit.dto;
 
 import lombok.Data;
 
