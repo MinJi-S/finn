@@ -60,14 +60,17 @@ public class MsgServiceImpl implements MsgService {
             process = runtime.exec(array);
 
             // shell 실행이 정상 동작했을 경우
-            successBufferReader = new BufferedReader(new InputStreamReader(process.getInputStream(), "EUC-KR"));
+            // successBufferReader = new BufferedReader(new InputStreamReader(process.getInputStream(), "EUC-KR"));
+            successBufferReader = new BufferedReader(new InputStreamReader(process.getInputStream(), "UTF-8"));
 
             while ((msg = successBufferReader.readLine()) != null) {
                 successOutput.append(msg + System.getProperty("line.separator"));
             }
 
             // shell 실행시 에러가 발생했을 경우
-            errorBufferReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), "EUC-KR"));
+            // errorBufferReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), "EUC-KR"));
+            errorBufferReader = new BufferedReader(new InputStreamReader(process.getErrorStream(), "UTF-8"));
+
             while ((msg = errorBufferReader.readLine()) != null) {
                 errorOutput.append(msg + System.getProperty("line.separator"));
             }
