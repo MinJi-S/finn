@@ -1,6 +1,9 @@
 package net.herit.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import net.herit.config.ApplicationProperties;
 import net.herit.service.MsgService;
@@ -29,6 +32,10 @@ public class MsgController {
     @Resource(name="msgSvc")
     private MsgService msgService;
 
+	@ApiOperation(value = "디렉토리 및 파일 리스트 조회")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "info", value = "디렉토리 명(dir, ags, pas, iss, eps, etc)", required = true, dataType = "string", paramType = "path", defaultValue = ""),
+	})
 	@CrossOrigin(origins="*")
 	@RequestMapping(method=RequestMethod.GET, value="/msg/server/list")
 	public String list(HttpServletRequest request) throws Exception {
@@ -60,6 +67,11 @@ public class MsgController {
 		return responseJson;
 	}
 
+	@ApiOperation(value = "API 전문 정보 조회")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "info", value = "디렉토리 명(ags, pas, iss, eps, etc)", required = true, dataType = "string", paramType = "path", defaultValue = "etc"),
+			@ApiImplicitParam(name = "filename", value = "info 디렉토리 하위에 있는 파일명", required = true, dataType = "string", paramType = "path", defaultValue = "R2D2_postman_collection.json"),
+	})
     @CrossOrigin(origins="*")
     @RequestMapping(method=RequestMethod.GET, value="/msg/server/json")
     public String json(HttpServletRequest request) throws Exception {

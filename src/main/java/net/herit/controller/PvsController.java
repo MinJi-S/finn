@@ -1,6 +1,9 @@
 package net.herit.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import net.herit.dto.ChsDeviceModelDto;
 import net.herit.service.PvsService;
@@ -32,6 +35,7 @@ public class PvsController {
 	 * @return
 	 * @throws Exception
 	 */
+	@ApiOperation(value = "CHS_DEVICE_MODEL 테이블 조회")
 	@CrossOrigin(origins="*")		// 글로벌 크로스 셋팅....... 모든 외부 도메인에서 요청 처리 허가
 	@RequestMapping(method=RequestMethod.GET, value="/pvs/select_chs_device_model")
 	public String pvs(HttpServletRequest request) throws Exception {

@@ -104,6 +104,21 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- Swagger 2 with a Spring REST API -->
+		<!-- https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
+		<!-- Enabling Springfox’s Swagger UI -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
 		<!-- test/java -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
