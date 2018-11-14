@@ -72,7 +72,7 @@ public class PvsServiceImpl implements PvsService {
         cmdLine.addArgument(homeCode, false);
         cmdLine.addArgument(uuid, false);
 
-        System.out.println(">> /pvs/query/delete");
+        System.out.println(">> /pvs/query/" + operation);
         System.out.println(">> path = " + path);
         System.out.println(">> cmdLine argument = " + cmdLine.toString());
 
