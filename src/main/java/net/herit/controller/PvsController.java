@@ -53,20 +53,27 @@ public class PvsController {
 	@CrossOrigin(origins = "*")
 	@RequestMapping(method = RequestMethod.GET, value = "/pvs/query/delete")
 	public String queryDelete(HttpServletRequest request) throws Exception {
-		return pvsService.getQuery("delete", request);
+
+		ObjectMapper responseMapper = new ObjectMapper();
+		String responseJson = responseMapper.writeValueAsString(pvsService.getQuery("delete", request));
+		return responseJson;
 	}
 
 	@ApiOperation(value = "사용자 생성 쿼리")
 	@CrossOrigin(origins = "*")
 	@RequestMapping(method = RequestMethod.GET, value = "/pvs/query/user")
 	public String queryUser(HttpServletRequest request) throws Exception {
-		return pvsService.getQuery("user", request);
+		ObjectMapper responseMapper = new ObjectMapper();
+		String responseJson = responseMapper.writeValueAsString(pvsService.getQuery("user", request));
+		return responseJson;
 	}
 
 	@ApiOperation(value = "단말 생성 쿼리")
 	@CrossOrigin(origins = "*")
 	@RequestMapping(method = RequestMethod.GET, value = "/pvs/query/device")
 	public String queryDevice(HttpServletRequest request) throws Exception {
-		return pvsService.getQuery("device", request);
+		ObjectMapper responseMapper = new ObjectMapper();
+		String responseJson = responseMapper.writeValueAsString(pvsService.getQuery("device", request));
+		return responseJson;
 	}
 }
