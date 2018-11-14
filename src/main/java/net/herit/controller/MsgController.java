@@ -50,7 +50,7 @@ public class MsgController {
 			cmd = "ls " + applicationProperties.getMsgBasePath() + parameter;
 		}
 
-        StringBuffer output = msgService.commandExc(cmd);
+        String output = msgService.commandExc(cmd);
 
         ArrayList<String> outputList = new ArrayList<String>();
         String[] split = output.toString().split("\n");
@@ -87,8 +87,8 @@ public class MsgController {
 
 		cmd = "cat " + applicationProperties.getMsgBasePath() + parameterInfo + "/" + parameterFilename;
 
-		StringBuffer output = msgService.commandExc(cmd);
+		String output = msgService.commandExc(cmd);
 
-        return output.toString();
+        return output;
     }
 }

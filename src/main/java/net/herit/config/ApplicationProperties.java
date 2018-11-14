@@ -26,7 +26,16 @@ public class ApplicationProperties {
 
 	@Value("${output.msg.base.path}")
 	String msgBasePath;
-	
+
+	@Value("${pvs.query.path.user}")
+	String pvsQueryPathUser;
+
+	@Value("${pvs.query.path.device}")
+	String pvsQueryPathDevice;
+
+	@Value("${pvs.query.path.delete}")
+	String pvsQueryPathDelete;
+
 	public ApplicationProperties() {
 		log.debug("\n======ApplicationProperties contructor.=======\n");
 	}

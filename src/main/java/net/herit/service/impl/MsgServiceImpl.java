@@ -15,7 +15,7 @@ public class MsgServiceImpl implements MsgService {
 
     private Logger log = Logger.getLogger(MsgServiceImpl.class);
 
-    public StringBuffer commandExc(String command) throws Exception {
+    public String commandExc(String command) throws Exception {
 
         /**
          * cmd 명령어 실행
@@ -115,6 +115,7 @@ public class MsgServiceImpl implements MsgService {
             }
         }
 
-        return output;
+        String result = output.toString().replaceAll("(\\r)", ""); // \\n은 빼자. 컨트롤러에서 추가 파싱해야한다. 디렉토리 구분으로 버튼 생성해야해서...
+        return result;
     }
 }

@@ -1,8 +1,6 @@
 package net.herit.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import net.herit.dto.ChsDeviceModelDto;
@@ -36,8 +34,8 @@ public class PvsController {
 	 * @throws Exception
 	 */
 	@ApiOperation(value = "CHS_DEVICE_MODEL 테이블 조회")
-	@CrossOrigin(origins="*")		// 글로벌 크로스 셋팅....... 모든 외부 도메인에서 요청 처리 허가
-	@RequestMapping(method=RequestMethod.GET, value="/pvs/select_chs_device_model")
+	@CrossOrigin(origins = "*")		// 글로벌 크로스 셋팅....... 모든 외부 도메인에서 요청 처리 허가
+	@RequestMapping(method = RequestMethod.GET, value = "/pvs/select_chs_device_model")
 	public String pvs(HttpServletRequest request) throws Exception {
 
 		List<ChsDeviceModelDto> chsDeviceModelDtoList = new ArrayList<>();
@@ -49,5 +47,26 @@ public class PvsController {
 		String responseJson = responseMapper.writeValueAsString(chsDeviceModelDtoList/*resultMap*/);
 
 		return responseJson;
+	}
+
+	@ApiOperation(value = "청약 사용자 및 단말 초기화 생성 쿼리")
+	@CrossOrigin(origins = "*")
+	@RequestMapping(method = RequestMethod.GET, value = "/pvs/query/delete")
+	public String queryDelete(HttpServletRequest request) throws Exception {
+		return pvsService.getQuery("delete", request);
+	}
+
+	@ApiOperation(value = "사용자 생성 쿼리")
+	@CrossOrigin(origins = "*")
+	@RequestMapping(method = RequestMethod.GET, value = "/pvs/query/user")
+	public String queryUser(HttpServletRequest request) throws Exception {
+		return pvsService.getQuery("user", request);
+	}
+
+	@ApiOperation(value = "단말 생성 쿼리")
+	@CrossOrigin(origins = "*")
+	@RequestMapping(method = RequestMethod.GET, value = "/pvs/query/device")
+	public String queryDevice(HttpServletRequest request) throws Exception {
+		return pvsService.getQuery("device", request);
 	}
 }
