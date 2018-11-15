@@ -55,7 +55,7 @@ public class PvsController {
 	public String queryDelete(HttpServletRequest request) throws Exception {
 
 		ObjectMapper responseMapper = new ObjectMapper();
-		String responseJson = responseMapper.writeValueAsString(pvsService.getQuery("delete", request));
+		String responseJson = responseMapper.writeValueAsString(pvsService.getDeleteQuery(request));
 		return responseJson;
 	}
 
@@ -64,7 +64,7 @@ public class PvsController {
 	@RequestMapping(method = RequestMethod.GET, value = "/pvs/query/user")
 	public String queryUser(HttpServletRequest request) throws Exception {
 		ObjectMapper responseMapper = new ObjectMapper();
-		String responseJson = responseMapper.writeValueAsString(pvsService.getQuery("user", request));
+		String responseJson = responseMapper.writeValueAsString(pvsService.getUserQuery(request));
 		return responseJson;
 	}
 
@@ -73,7 +73,7 @@ public class PvsController {
 	@RequestMapping(method = RequestMethod.GET, value = "/pvs/query/device")
 	public String queryDevice(HttpServletRequest request) throws Exception {
 		ObjectMapper responseMapper = new ObjectMapper();
-		String responseJson = responseMapper.writeValueAsString(pvsService.getQuery("device", request));
+		String responseJson = responseMapper.writeValueAsString(pvsService.getDeviceQuery(request));
 		return responseJson;
 	}
 }

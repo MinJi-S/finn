@@ -19,6 +19,11 @@ import java.util.List;
 @Service("pvsSvc")
 public class PvsServiceImpl implements PvsService {
 
+    private DefaultExecutor excutor = null;
+    private ByteArrayOutputStream baos = null;
+    private PumpStreamHandler streamHandler = null;
+
+
     @Autowired
     private ApplicationProperties applicationProperties;
 
@@ -33,35 +38,100 @@ public class PvsServiceImpl implements PvsService {
         return pvsDao.selectChsDeviceModel();
     }
 
-    public String getQuery(String operation, HttpServletRequest request) throws Exception {
+    public void commandInit() {
+        excutor = new DefaultExecutor();
+        baos = new ByteArrayOutputStream();
+        streamHandler = new PumpStreamHandler(baos);
+    }
+
+    public String getDeleteQuery(HttpServletRequest request) throws Exception {
+        String path = this.applicationProperties.getPvsQueryPathDelete();
 
         // get parameter
+        // homeCode, uuid
+        String homeCode = request.getParameter("homeCode");
+        String uuid = request.getParameter("uuid");
+
+        this.commandInit();
+        excutor.setStreamHandler(streamHandler);
+
+        CommandLine cmdLine = CommandLine.parse(path);
+
+        cmdLine.addArgument(homeCode, false);
+        cmdLine.addArgument(uuid, false);
+
+        System.out.println(">> /pvs/query/delete");
+        System.out.println(">> path = " + path);
+        System.out.println(">> cmdLine argument = " + cmdLine.toString());
+
+        int exitCode = excutor.execute(cmdLine);
+        System.out.println(">> exitCode = " + Integer.valueOf(exitCode));
+
+        String resultString = baos.toString(StandardCharsets.UTF_8.name());
+        // resultString = resultString.replaceAll("(\\r|\\n)", "");
+        resultString = resultString.replaceAll("\\r", "");			// \\n은 하지말자 이쁘게 출력하기 위함
+
+        System.out.println(">> resultString = " + resultString);
+
+        return resultString;
+    }
+
+    public String getUserQuery(HttpServletRequest request) throws Exception {
+        String path = this.applicationProperties.getPvsQueryPathUser();
+
+        // get parameter
+        // oneId, subsNo, homeName, subsType, custNo, svcCode
+        String oneId = request.getParameter("oneId");
+        String subsNo = request.getParameter("subsNo");
+        String homeName = request.getParameter("homeName");
+        String subsType = request.getParameter("subsType");
+        String custNo = request.getParameter("custNo");
+        String svcCode = request.getParameter("svcCode");
+
+        this.commandInit();
+        excutor.setStreamHandler(streamHandler);
+
+        CommandLine cmdLine = CommandLine.parse(path);
+
+        cmdLine.addArgument(oneId, false);
+        cmdLine.addArgument(subsNo, false);
+        cmdLine.addArgument(homeName, false);
+        cmdLine.addArgument(subsType, false);
+        cmdLine.addArgument(custNo, false);
+        cmdLine.addArgument(svcCode, false);
+
+        System.out.println(">> /pvs/query/user");
+        System.out.println(">> path = " + path);
+        System.out.println(">> cmdLine argument = " + cmdLine.toString());
+
+        int exitCode = excutor.execute(cmdLine);
+        System.out.println(">> exitCode = " + Integer.valueOf(exitCode));
+
+        String resultString = baos.toString(StandardCharsets.UTF_8.name());
+        // resultString = resultString.replaceAll("(\\r|\\n)", "");
+        resultString = resultString.replaceAll("\\r", "");			// \\n은 하지말자 이쁘게 출력하기 위함
+
+        System.out.println(">> resultString = " + resultString);
+
+        return resultString;
+    }
+
+    public String getDeviceQuery(HttpServletRequest request) throws Exception {
+        String path = this.applicationProperties.getPvsQueryPathDevice();
+
+        // get parameter
+        // modelNo, typeCode, mac, sn, homeCode, uuid, chsDeviceTypeLevel, deviceIdType
         String modelNo = request.getParameter("modelNo");
         String typeCode = request.getParameter("typeCode");
         String mac = request.getParameter("mac");
         String sn = request.getParameter("sn");
         String homeCode = request.getParameter("homeCode");
         String uuid = request.getParameter("uuid");
+        String chsDeviceTypeLevel = request.getParameter("chsDeviceTypeLevel");
+        String deviceIdType = request.getParameter("deviceIdType");
 
-        DefaultExecutor excutor = new DefaultExecutor();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PumpStreamHandler streamHandler = new PumpStreamHandler(baos);
-
+        this.commandInit();
         excutor.setStreamHandler(streamHandler);
-
-        String path = "";
-
-        switch (operation) {
-            case "delete":      // 사용자/단말초기화
-                path = this.applicationProperties.getPvsQueryPathDelete();
-                break;
-            case "user":        // 사용자 등록
-                path = this.applicationProperties.getPvsQueryPathUser();
-                break;
-            case "device":      // 단말 등록
-                path = this.applicationProperties.getPvsQueryPathDevice();
-                break;
-        }
 
         CommandLine cmdLine = CommandLine.parse(path);
 
@@ -71,8 +141,10 @@ public class PvsServiceImpl implements PvsService {
         cmdLine.addArgument(sn, false);
         cmdLine.addArgument(homeCode, false);
         cmdLine.addArgument(uuid, false);
+        cmdLine.addArgument(chsDeviceTypeLevel, false);
+        cmdLine.addArgument(deviceIdType, false);
 
-        System.out.println(">> /pvs/query/" + operation);
+        System.out.println(">> /pvs/query/device");
         System.out.println(">> path = " + path);
         System.out.println(">> cmdLine argument = " + cmdLine.toString());
 
