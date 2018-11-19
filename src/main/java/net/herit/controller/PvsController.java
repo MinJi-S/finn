@@ -1,6 +1,8 @@
 package net.herit.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import net.herit.dto.ChsDeviceModelDto;
@@ -50,6 +52,10 @@ public class PvsController {
 	}
 
 	@ApiOperation(value = "청약 사용자 및 단말 초기화 생성 쿼리")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "homeCode", value = "HOME_CODE OR SUBS_NO", required = true, dataType = "string", paramType = "path"),
+			@ApiImplicitParam(name = "uuid", value = "DEVICE UUID", required = true, dataType = "string", paramType = "path"),
+	})
 	@CrossOrigin(origins = "*")
 	@RequestMapping(method = RequestMethod.GET, value = "/pvs/query/delete")
 	public String queryDelete(HttpServletRequest request) throws Exception {
@@ -60,6 +66,14 @@ public class PvsController {
 	}
 
 	@ApiOperation(value = "사용자 생성 쿼리")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "one_id", value = "ONE_ID", required = true, dataType = "string", paramType = "path"),
+			@ApiImplicitParam(name = "subsNo", value = "SUBS_NO", required = true, dataType = "string", paramType = "path"),
+			@ApiImplicitParam(name = "homeName", value = "HOME_NAME", required = true, dataType = "string", paramType = "path"),
+			@ApiImplicitParam(name = "subsType", value = "SUBS_TYPE", required = true, dataType = "string", paramType = "path"),
+			@ApiImplicitParam(name = "custNo", value = "CUST_NO", required = true, dataType = "string", paramType = "path"),
+			@ApiImplicitParam(name = "svcCode", value = "SVC_CODE", required = true, dataType = "string", paramType = "path"),
+	})
 	@CrossOrigin(origins = "*")
 	@RequestMapping(method = RequestMethod.GET, value = "/pvs/query/user")
 	public String queryUser(HttpServletRequest request) throws Exception {
@@ -69,6 +83,16 @@ public class PvsController {
 	}
 
 	@ApiOperation(value = "단말 생성 쿼리")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "modelNo", value = "MODEL_NO", required = true, dataType = "string", paramType = "path"),
+			@ApiImplicitParam(name = "typeCode", value = "TYPE_CODE", required = true, dataType = "string", paramType = "path"),
+			@ApiImplicitParam(name = "mac", value = "MAC", required = true, dataType = "string", paramType = "path"),
+			@ApiImplicitParam(name = "sn", value = "SN", required = true, dataType = "string", paramType = "path"),
+			@ApiImplicitParam(name = "homeCode", value = "HOME_CODE", required = true, dataType = "string", paramType = "path"),
+			@ApiImplicitParam(name = "uuid", value = "UUID", required = true, dataType = "string", paramType = "path"),
+			@ApiImplicitParam(name = "chsDeviceTypeLevel", value = "CHS_DEVICE_TYPE_MODEL", required = true, dataType = "string", paramType = "path", defaultValue = "0"),
+			@ApiImplicitParam(name = "deviceIdType", value = "DEVICE_ID_TYPE", required = true, dataType = "string", paramType = "path", defaultValue = "1"),
+	})
 	@CrossOrigin(origins = "*")
 	@RequestMapping(method = RequestMethod.GET, value = "/pvs/query/device")
 	public String queryDevice(HttpServletRequest request) throws Exception {

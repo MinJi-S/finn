@@ -7,6 +7,7 @@ import net.herit.service.PvsService;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +20,7 @@ import java.util.List;
 @Service("pvsSvc")
 public class PvsServiceImpl implements PvsService {
 
-    private DefaultExecutor excutor = null;
-    private ByteArrayOutputStream baos = null;
-    private PumpStreamHandler streamHandler = null;
-
+    Logger log = Logger.getLogger(PvsServiceImpl.class);
 
     @Autowired
     private ApplicationProperties applicationProperties;
@@ -38,12 +36,6 @@ public class PvsServiceImpl implements PvsService {
         return pvsDao.selectChsDeviceModel();
     }
 
-    public void commandInit() {
-        excutor = new DefaultExecutor();
-        baos = new ByteArrayOutputStream();
-        streamHandler = new PumpStreamHandler(baos);
-    }
-
     public String getDeleteQuery(HttpServletRequest request) throws Exception {
         String path = this.applicationProperties.getPvsQueryPathDelete();
 
@@ -52,7 +44,10 @@ public class PvsServiceImpl implements PvsService {
         String homeCode = request.getParameter("homeCode");
         String uuid = request.getParameter("uuid");
 
-        this.commandInit();
+        DefaultExecutor excutor = new DefaultExecutor();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PumpStreamHandler streamHandler = new PumpStreamHandler(baos);
+
         excutor.setStreamHandler(streamHandler);
 
         CommandLine cmdLine = CommandLine.parse(path);
@@ -60,18 +55,18 @@ public class PvsServiceImpl implements PvsService {
         cmdLine.addArgument(homeCode, false);
         cmdLine.addArgument(uuid, false);
 
-        System.out.println(">> /pvs/query/delete");
-        System.out.println(">> path = " + path);
-        System.out.println(">> cmdLine argument = " + cmdLine.toString());
+        log.debug(">> /pvs/query/delete");
+        log.debug(">> path = " + path);
+        log.debug(">> cmdLine argument = " + cmdLine.toString());
 
         int exitCode = excutor.execute(cmdLine);
-        System.out.println(">> exitCode = " + Integer.valueOf(exitCode));
+        log.debug(">> exitCode = " + Integer.valueOf(exitCode));
 
         String resultString = baos.toString(StandardCharsets.UTF_8.name());
         // resultString = resultString.replaceAll("(\\r|\\n)", "");
         resultString = resultString.replaceAll("\\r", "");			// \\n은 하지말자 이쁘게 출력하기 위함
 
-        System.out.println(">> resultString = " + resultString);
+        log.debug(">> resultString = " + resultString);
 
         return resultString;
     }
@@ -88,7 +83,10 @@ public class PvsServiceImpl implements PvsService {
         String custNo = request.getParameter("custNo");
         String svcCode = request.getParameter("svcCode");
 
-        this.commandInit();
+        DefaultExecutor excutor = new DefaultExecutor();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PumpStreamHandler streamHandler = new PumpStreamHandler(baos);
+
         excutor.setStreamHandler(streamHandler);
 
         CommandLine cmdLine = CommandLine.parse(path);
@@ -100,18 +98,18 @@ public class PvsServiceImpl implements PvsService {
         cmdLine.addArgument(custNo, false);
         cmdLine.addArgument(svcCode, false);
 
-        System.out.println(">> /pvs/query/user");
-        System.out.println(">> path = " + path);
-        System.out.println(">> cmdLine argument = " + cmdLine.toString());
+        log.debug(">> /pvs/query/delete");
+        log.debug(">> path = " + path);
+        log.debug(">> cmdLine argument = " + cmdLine.toString());
 
         int exitCode = excutor.execute(cmdLine);
-        System.out.println(">> exitCode = " + Integer.valueOf(exitCode));
+        log.debug(">> exitCode = " + Integer.valueOf(exitCode));
 
         String resultString = baos.toString(StandardCharsets.UTF_8.name());
         // resultString = resultString.replaceAll("(\\r|\\n)", "");
         resultString = resultString.replaceAll("\\r", "");			// \\n은 하지말자 이쁘게 출력하기 위함
 
-        System.out.println(">> resultString = " + resultString);
+        log.debug(">> resultString = " + resultString);
 
         return resultString;
     }
@@ -130,7 +128,10 @@ public class PvsServiceImpl implements PvsService {
         String chsDeviceTypeLevel = request.getParameter("chsDeviceTypeLevel");
         String deviceIdType = request.getParameter("deviceIdType");
 
-        this.commandInit();
+        DefaultExecutor excutor = new DefaultExecutor();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PumpStreamHandler streamHandler = new PumpStreamHandler(baos);
+
         excutor.setStreamHandler(streamHandler);
 
         CommandLine cmdLine = CommandLine.parse(path);
@@ -144,18 +145,18 @@ public class PvsServiceImpl implements PvsService {
         cmdLine.addArgument(chsDeviceTypeLevel, false);
         cmdLine.addArgument(deviceIdType, false);
 
-        System.out.println(">> /pvs/query/device");
-        System.out.println(">> path = " + path);
-        System.out.println(">> cmdLine argument = " + cmdLine.toString());
+        log.debug(">> /pvs/query/delete");
+        log.debug(">> path = " + path);
+        log.debug(">> cmdLine argument = " + cmdLine.toString());
 
         int exitCode = excutor.execute(cmdLine);
-        System.out.println(">> exitCode = " + Integer.valueOf(exitCode));
+        log.debug(">> exitCode = " + Integer.valueOf(exitCode));
 
         String resultString = baos.toString(StandardCharsets.UTF_8.name());
         // resultString = resultString.replaceAll("(\\r|\\n)", "");
         resultString = resultString.replaceAll("\\r", "");			// \\n은 하지말자 이쁘게 출력하기 위함
 
-        System.out.println(">> resultString = " + resultString);
+        log.debug(">> resultString = " + resultString);
 
         return resultString;
     }
